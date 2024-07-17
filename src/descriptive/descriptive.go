@@ -66,11 +66,11 @@ func WidhtedMean(values []float64) float64 {
 /*
 portion = ΣF(x i) / n
 */
-func PortionMean(values []float64, item float64) float64 {
+func Portion(values []float64, item float64) float64 {
 	var sum float64
 	for _, v := range values {
 		if v == item {
-			sum += v
+			sum++
 		}
 	}
 	return sum / float64(len(values))
