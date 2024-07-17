@@ -76,6 +76,19 @@ func Portion(values []float64, item float64) float64 {
 	return sum / float64(len(values))
 }
 
+/*
+portion = ΣF(x i) / n
+*/
+func PortionMean(values []float64, item float64) float64 {
+	var sum float64
+	for _, v := range values {
+		if v == item {
+			sum += v
+		}
+	}
+	return sum / float64(len(values))
+}
+
 func Median(values []float64) float64 {
 	if len(values) == 0 {
 		return 0
