@@ -1,8 +1,6 @@
 package descriptive
 
 import (
-	"fmt"
-
 	"github.com/abinashphulkonwar/stats/src/services"
 )
 
@@ -102,8 +100,6 @@ func Median(values []float64) float64 {
 		middleIndex := len(sortedValues) / 2
 		first := sortedValues[middleIndex-1]
 		second := sortedValues[middleIndex]
-		fmt.Printf("middleIndex: %v, first: %v, second: %v\n", middleIndex, first, second)
-
 		return (first + second) / 2
 	}
 

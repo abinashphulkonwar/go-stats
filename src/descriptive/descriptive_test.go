@@ -1,6 +1,7 @@
 package descriptive_test
 
 import (
+	"fmt"
 	"math"
 	"testing"
 
@@ -46,4 +47,18 @@ func TestMode(t *testing.T) {
 			t.Errorf("Expected %v, got %v", statsMode, mode)
 		}
 	}
+}
+
+func TestQuantials(t *testing.T) {
+
+	values := []float64{}
+
+	for i := 1; i <= 100; i++ {
+		values = append(values, float64(i))
+	}
+	statsQuantials, _ := stats.Quartile(values)
+	quantials := descriptive.Quantile(values)
+	fmt.Printf("stats Q1: %v; Q2: %v; Q3: %v\n", statsQuantials.Q1, statsQuantials.Q2, statsQuantials.Q3)
+	fmt.Printf("descriptive Q1: %v; Q2: %v; Q3: %v; Q4: %v\n", quantials.Q1, quantials.Q2, quantials.Q3, quantials.Q4)
+
 }
