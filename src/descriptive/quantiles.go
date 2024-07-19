@@ -14,6 +14,7 @@ type Quantiles struct {
 func Quantile(inputs []float64) Quantiles {
 	values := services.Sort(inputs)
 	l := len(values)
+
 	q1 := values[services.Position(25, l)]
 	q2 := values[services.Position(50, l)]
 	q3 := values[services.Position(75, l)]
