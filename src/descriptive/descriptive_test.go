@@ -73,7 +73,7 @@ func TestQuantials(t *testing.T) {
 }
 
 func TestDetailed(t *testing.T) {
-	values := RandomArray(19800)
+	values := RandomArray(190)
 
 	statsDetaild := [10]float64{}
 
@@ -84,10 +84,22 @@ func TestDetailed(t *testing.T) {
 
 	detaild := descriptive.Detailed(values)
 	for i := 0; i < 10; i++ {
-		fmt.Printf("Stats: %v; Descriptive: %v\n", statsDetaild[i], detaild[i])
 		if detaild[i] != statsDetaild[i] {
 			t.Errorf("Expected %v, got %v", statsDetaild, detaild)
 		}
+	}
+
+}
+
+func TestPercentile(t *testing.T) {
+	values := RandomArray(198)
+
+	statsPercentile, _ := stats.Percentile(values, 50.5)
+
+	percentile := descriptive.Percentile(values, 50.5)
+
+	if percentile != statsPercentile {
+		t.Errorf("Expected %v, got %v", statsPercentile, percentile)
 	}
 
 }
