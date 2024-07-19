@@ -31,3 +31,15 @@ func Quantile(inputs []float64) Quantiles {
 	}
 
 }
+
+func Detailed(input []float64) []float64 {
+
+	values := services.Sort(input)
+	l := len(values)
+	detailds := []float64{}
+	for i := 10; i <= 100; i = i + 10 {
+		detailds = append(detailds, values[Position(i, l)])
+	}
+
+	return detailds
+}

@@ -3,11 +3,20 @@ package descriptive_test
 import (
 	"fmt"
 	"math"
+	"math/rand"
 	"testing"
 
 	"github.com/abinashphulkonwar/stats/src/descriptive"
 	"github.com/montanaflynn/stats"
 )
+
+func RandomArray(n int) []float64 {
+	values := make([]float64, n)
+	for i := 0; i < n; i++ {
+		values[i] = float64(i) * (rand.Float64() * 10)
+	}
+	return values
+}
 
 func TestWidghtedMean(t *testing.T) {
 	values := []float64{1, 8, 2, 3, 7, 9, 10, 4, 5, 6, 9}
@@ -60,5 +69,25 @@ func TestQuantials(t *testing.T) {
 	quantials := descriptive.Quantile(values)
 	fmt.Printf("stats Q1: %v; Q2: %v; Q3: %v\n", statsQuantials.Q1, statsQuantials.Q2, statsQuantials.Q3)
 	fmt.Printf("descriptive Q1: %v; Q2: %v; Q3: %v; Q4: %v\n", quantials.Q1, quantials.Q2, quantials.Q3, quantials.Q4)
+
+}
+
+func TestDetailed(t *testing.T) {
+	values := RandomArray(19800)
+
+	statsDetaild := [10]float64{}
+
+	for i := 10; i <= 100; i = i + 10 {
+		per, _ := stats.Percentile(values, float64(i))
+		statsDetaild[(i/10)-1] = per
+	}
+
+	detaild := descriptive.Detailed(values)
+	for i := 0; i < 10; i++ {
+		fmt.Printf("Stats: %v; Descriptive: %v\n", statsDetaild[i], detaild[i])
+		if detaild[i] != statsDetaild[i] {
+			t.Errorf("Expected %v, got %v", statsDetaild, detaild)
+		}
+	}
 
 }
